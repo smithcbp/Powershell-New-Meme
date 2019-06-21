@@ -1,21 +1,21 @@
-﻿<#
+<#
 	.SYNOPSIS
 		Powershell Based Meme Generator
 	
 	.DESCRIPTION
-		Get-Meme uses the imgflip memegenerator api (https://api.imgflip.com/) to create the beautiful work of art known as a Meme.
-		You will need to create an account at https://imgflip.com/signup. Use those credentials for the $Imgflip_UN and $Imgflip_PW variables.
+		New-Meme uses the imgflip memegenerator api (https://api.imgflip.com/) to create the beautiful work of art known as a Meme.
+		You will need to create an account at https://imgflip.com/signup.
 	
 	.EXAMPLE
-		Get-Meme -List
-		Get-Meme -Meme_Id "61544" -Text_One "Using Powershell" -Text_Two "I made my first meme!" -view
-		Get-Meme -Meme_Name "Bear" -Text_Two "I don't even like memes" -Path C:\Temp -Clip -View
+		New-Meme -List
+		New-Meme -ImgFlip_Cred [imgflip_username] -Meme_Id "61544" -Text_One "Using Powershell" -Text_Two "I made my first meme!" -view
+		New-Meme -ImgFlip_Cred [imgflip_username] -Meme_Name "Bear" -Text_Two "I don't even like memes" -Path C:\Temp -Clip -View
 	
 	.NOTES
 		Happy Memeing!
 #>
 
-Function Get-Meme
+Function New-Meme
 {
 	
 	param
@@ -26,6 +26,10 @@ Function Get-Meme
 		[Int]$Meme_Id,
 		[parameter(ParameterSetName = 'Name')]
 		[string]$Meme_Name,
+        [parameter(ParameterSetName = 'ID')]
+		[parameter(ParameterSetName = 'Name')]
+        [parameter(Mandatory = $True)]
+		[System.Management.Automation.PSCredential]$ImgFlip_Cred,
 		[parameter(ParameterSetName = 'ID')]
 		[parameter(ParameterSetName = 'Name')]
 		[string]$Text_One,
@@ -41,14 +45,7 @@ Function Get-Meme
 		[parameter(ParameterSetName = 'ID')]
 		[parameter(ParameterSetName = 'Name')]
 		[System.IO.FileInfo]$Path
-	)
-	
-	$Imgflip_UN = $null
-	$Imgflip_PW = $null
-	
-	if (!$Imgflip_UN) { $Imgflip_UN = Read-Host "Please enter your Imgflip Username" }
-	if (!$Imgflip_PW) { $Imgflip_PW = Read-Host "Please enter your Imgflip Password" }
-	
+	)	
 	
 	$MemeList = Invoke-RestMethod -Uri "https://api.imgflip.com/get_memes"
 	
@@ -81,8 +78,8 @@ Function Get-Meme
 	
 	$memeparams = @{
 		template_id = $MemeTemplate.id
-		username    = $Imgflip_UN
-		password    = $Imgflip_PW
+		username    = $ImgFlip_Cred.UserName
+		password    = $ImgFlip_Cred.GetNetworkCredential().Password 
 		text0	    = $Text_One
 		text1	    = $Text_Two
 	}
@@ -103,12 +100,13 @@ Function Get-Meme
 		$filename = $MemeTemplate.Name + '_' + $Text_One + '_' + $Text_Two + '.jpg'
 		$wc = New-Object System.Net.WebClient
 		$wc.DownloadFile($($response.data.url), "$path\$filename")
+        Write-Output "Saved meme to $path\$filename"
 	}
 	
 	if ($view)
 	{
+        Write-Output "Launching $($response.data.url)"
 		Start-Process $response.data.url
 	}
 	
 }
-
