@@ -26,9 +26,9 @@ Function New-Meme
 		[Int]$Meme_Id,
 		[parameter(ParameterSetName = 'Name')]
 		[string]$Meme_Name,
-        [parameter(ParameterSetName = 'ID')]
+        	[parameter(ParameterSetName = 'ID')]
 		[parameter(ParameterSetName = 'Name')]
-        [parameter(Mandatory = $True)]
+        	[parameter(Mandatory = $True)]
 		[System.Management.Automation.PSCredential]$ImgFlip_Cred,
 		[parameter(ParameterSetName = 'ID')]
 		[parameter(ParameterSetName = 'Name')]
