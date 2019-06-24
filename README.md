@@ -1,4 +1,4 @@
-<#
+
 	.SYNOPSIS
 		Powershell Based Meme Generator GUI and Module
 	
@@ -10,4 +10,3 @@
 	.NOTES
 		Happy Memeing! Made by Chris Smith
         https://github.com/smithcbp/Powershell-New-Meme
-#>
