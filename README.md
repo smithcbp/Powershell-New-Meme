@@ -1,4 +1,7 @@
 
+	![alt text](https://github.com/smithcbp/Powershell-New-Meme/raw/master/MemeMakerScreenshot.PNG)
+
+	
 	.SYNOPSIS
 		Powershell Based Meme Generator GUI and Module
 	
