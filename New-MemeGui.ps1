@@ -8,7 +8,7 @@
 	    This form was created using POSHGUI.com  a free online gui designer for PowerShell
 	
 	.NOTES
-		Happy Memeing! Made by Chris Smith
+		Happy Memeing!
         https://github.com/smithcbp/Powershell-New-Meme
 #>
 
@@ -51,7 +51,7 @@ $TitleLabel.location = New-Object System.Drawing.Point(15, 10)
 $TitleLabel.Font = 'Consolas,24,style=Bold,Underline'
 
 $SubTitleLabel = New-Object system.Windows.Forms.Label
-$SubTitleLabel.text = "Created by Chris Smith`nhttps://github.com/smithcbp`nSpecial Thanks to PoshGUI.com"
+$SubTitleLabel.text = "`nhttps://github.com/smithcbp`nSpecial Thanks to PoshGUI.com"
 $SubTitleLabel.AutoSize = $true
 $SubTitleLabel.width = 25
 $SubTitleLabel.height = 10
