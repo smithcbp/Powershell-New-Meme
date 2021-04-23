@@ -7,7 +7,7 @@
 	    This form was created using POSHGUI.com  a free online gui designer for PowerShell
 	
 	.NOTES
-		Happy Memeing! Made by Chris Smith
+		Happy Memeing!
         https://github.com/smithcbp/Powershell-New-Meme
 
 ![MemeMakerScreenshot](https://github.com/smithcbp/Powershell-New-Meme/raw/master/MemeMakerScreenshot.PNG)
